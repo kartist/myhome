@@ -21,4 +21,6 @@ public class ImageLibEntity extends BaseEntity {
 
     private String description;
 
+    private String suffix;
+
 }

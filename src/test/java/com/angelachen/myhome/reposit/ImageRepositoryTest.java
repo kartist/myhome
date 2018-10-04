@@ -26,6 +26,7 @@ public class ImageRepositoryTest extends MyhomeApplicationTests {
 
     @Before
     public void setUp() throws Exception {
+
     }
 
     @After
@@ -40,6 +41,7 @@ public class ImageRepositoryTest extends MyhomeApplicationTests {
         imageDto.setFilePath("test/test");
         imageDto.setUploadTime(new Date());
         imageDto.setFileName("test.file");
+        imageDto.setSuffix("png");
 
         Integer id = imageRepository.createRecord(imageDto, user);
         log.info("id : {}", id);

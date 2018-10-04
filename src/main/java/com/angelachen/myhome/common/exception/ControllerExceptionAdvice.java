@@ -18,7 +18,7 @@ public class ControllerExceptionAdvice {
         return new JsonResult(e.getMessage());
     }
 
-    @ExceptionHandler(value = ServiceException.class)
+    @ExceptionHandler(value = Exception.class)
     public JsonResult adviceException(Exception e) {
         log.error(" exception : {}", e);
         return new JsonResult(JsonResult.ResultState.SERVER_ERROR);

@@ -176,6 +176,12 @@
 			<include refid="Example_Where_Clause" />
 		</if >
 	</select >
+	<select id="selectByUserName" resultType="com.angelachen.myhome.entity.UserEntity" >
+		select
+		<include refid="Base_Column_List" />
+		from user
+		where name = #{userName}
+	</select >
 	<update id="updateByExampleSelective" parameterType="map" >
 		update user
 		<set >

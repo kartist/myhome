@@ -11,16 +11,19 @@ import javax.servlet.http.HttpSession;
  */
 public class UserUtil {
 
+    public static final String SESSION_USER = "user";
+
+
     public static User getUser(HttpServletRequest request) {
         return getUser(request.getSession());
     }
 
     public static User getUser(HttpSession session) {
-        return (User) session.getAttribute("user");
+        return (User) session.getAttribute(UserUtil.SESSION_USER);
     }
 
     public static User getGoodUser(HttpServletRequest request) {
-        return getGoodUser(request);
+        return getGoodUser(request.getSession());
     }
 
     public static User getGoodUser(HttpSession session) {

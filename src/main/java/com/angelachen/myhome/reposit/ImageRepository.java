@@ -23,6 +23,7 @@ public class ImageRepository {
         imageLibEntity.setCreateUser(user.getId());
         imageLibEntity.setTitle(imageDto.getFileName());
         imageLibEntity.setPath(imageDto.getFilePath());
+        imageLibEntity.setSuffix(imageDto.getSuffix());
 
         imageLibMapper.insertSelective(imageLibEntity);
         return imageLibEntity.getId();

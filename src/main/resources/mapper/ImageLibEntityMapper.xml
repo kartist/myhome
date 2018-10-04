@@ -9,6 +9,7 @@
 		<result column="path" jdbcType="VARCHAR" property="path" />
 		<result column="title" jdbcType="VARCHAR" property="title" />
 		<result column="description" jdbcType="VARCHAR" property="description" />
+		<result column="suffix" jdbcType="VARCHAR" property="suffix" />
 	</resultMap >
 	<sql id="Example_Where_Clause" >
 		<where >
@@ -71,7 +72,7 @@
 		</where >
 	</sql >
 	<sql id="Base_Column_List" >
-    id, createTime, createUser, isDelete, path, title, description
+    id, createTime, createUser, isDelete, path, title, description ,suffix
   </sql >
 	<select id="selectByExample" parameterType="com.angelachen.myhome.entity.ImageLibExample"
 	        resultMap="BaseResultMap" >
@@ -108,10 +109,10 @@
 	<insert id="insert" parameterType="com.angelachen.myhome.entity.ImageLibEntity" >
     insert into image_lib (id, createTime, createUser, 
       isDelete, path, title, 
-      description)
+      description ,suffix)
     values (#{id,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{createUser,jdbcType=INTEGER}, 
       #{delete,jdbcType=TINYINT}, #{path,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, 
-      #{description,jdbcType=VARCHAR})
+      #{description,jdbcType=VARCHAR}, #{suffix,jdbcType=VARCHAR})
   </insert >
 	<insert id="insertSelective" parameterType="com.angelachen.myhome.entity.ImageLibEntity" >
 		<selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER" >
@@ -140,6 +141,9 @@
 			<if test="description != null" >
 				description,
 			</if >
+			<if test="suffix != null" >
+				suffix,
+			</if >
 		</trim >
 		<trim prefix="values (" suffix=")" suffixOverrides="," >
 			<if test="id != null" >
@@ -162,6 +166,9 @@
 			</if >
 			<if test="description != null" >
 				#{description,jdbcType=VARCHAR},
+			</if >
+			<if test="suffix != null" >
+				#{suffix,jdbcType=VARCHAR},
 			</if >
 		</trim >
 	</insert >
@@ -196,6 +203,9 @@
 			<if test="record.description != null" >
 				description = #{record.description,jdbcType=VARCHAR},
 			</if >
+			<if test="record.suffix != null" >
+				suffix = #{record.suffix,jdbcType=VARCHAR},
+			</if >
 		</set >
 		<if test="_parameter != null" >
 			<include refid="Update_By_Example_Where_Clause" />
@@ -209,7 +219,8 @@
 		isDelete = #{record.delete,jdbcType=TINYINT},
 		path = #{record.path,jdbcType=VARCHAR},
 		title = #{record.title,jdbcType=VARCHAR},
-		description = #{record.description,jdbcType=VARCHAR}
+		description = #{record.description,jdbcType=VARCHAR},
+		suffix = #{record.suffix,jdbcType=VARCHAR}
 		<if test="_parameter != null" >
 			<include refid="Update_By_Example_Where_Clause" />
 		</if >
@@ -235,6 +246,9 @@
 			<if test="description != null" >
 				description = #{description,jdbcType=VARCHAR},
 			</if >
+			<if test="suffix != null" >
+				suffix = #{suffix,jdbcType=VARCHAR},
+			</if >
 		</set >
 		where id = #{id,jdbcType=INTEGER}
 	</update >
@@ -245,7 +259,8 @@
       isDelete = #{delete,jdbcType=TINYINT},
       path = #{path,jdbcType=VARCHAR},
       title = #{title,jdbcType=VARCHAR},
-      description = #{description,jdbcType=VARCHAR}
+      description = #{description,jdbcType=VARCHAR},
+      suffix = #{suffix,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update >
 </mapper >

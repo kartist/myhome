@@ -1,5 +1,6 @@
 package com.angelachen.myhome.service;
 
+import com.angelachen.myhome.common.dto.ImageDto;
 import com.angelachen.myhome.common.model.User;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -15,5 +16,13 @@ public interface ImageService {
      * @return 保存的文件id
      */
     Integer saveUploadImage(MultipartFile multipartFile, User user);
+
+    /**
+     * 根据 图片id获取图片信息
+     *
+     * @param imgId 图片id
+     * @return 文件
+     */
+    ImageDto getImageDtoById(Integer imgId);
 
 }

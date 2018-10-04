@@ -1,12 +1,29 @@
 package com.angelachen.myhome.common.exception;
 
+import lombok.Getter;
+
 /**
  * @author Kartist 2018/10/4 14:28
  */
+@Getter
 public class ServiceException extends RuntimeException {
+
+
+    private String message;
+
+    private String logStr;
+
+    private Object[] causeObj;
 
     public ServiceException() {
         super();
+    }
+
+
+    public ServiceException(String message, String logStr, Object... objs) {
+        this.message = message;
+        this.logStr = logStr;
+        this.causeObj = objs;
     }
 
     public ServiceException(String message) {

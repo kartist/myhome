@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+	"http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration >
+	<!--这个文件内容自己修改-->
+	<!--  <properties resource="application-${environment}.properties"/>-->
+	<!-- 数据库驱动包位置 -->
+	<classPathEntry
+		location="C:\Users\Kartist\.m2\repository\mysql\mysql-connector-java\5.1.47\mysql-connector-java-5.1.47.jar" />
+	<context id="DB2Tables" targetRuntime="MyBatis3" >
+		<commentGenerator >
+			<property name="suppressAllComments" value="true" />
+		</commentGenerator >
+		<!-- 数据库链接URL、用户名、密码 -->
+		<jdbcConnection driverClass="com.mysql.jdbc.Driver"
+		                connectionURL="jdbc:mysql://120.77.200.5:3306/myhome?useSSL=true&amp;useUnicode=true&amp;characterEncoding=utf8&amp;zeroDateTimeBehavior=convertToNull"
+		                userId="root" password="root" >
+		</jdbcConnection >
+		<javaTypeResolver >
+			<property name="forceBigDecimals" value="false" />
+		</javaTypeResolver >
+
+		<!-- 生成模型的包名和位置 -->
+
+		<!-- 如果使用eclipse 插件逆向生成文件，targetProject的路径以项目名称为起始路径 -->
+		<!-- 如果使用的是maven的mybatis-generator插件生成文件，targetProject的路径以src为起始路径 -->
+		<javaModelGenerator targetPackage="com.angelachen.myhome"
+		                    targetProject="src/main/java" >
+
+			<property name="enableSubPackages" value="true" />
+			<property name="trimStrings" value="true" />
+
+		</javaModelGenerator >
+		<!-- 生成的映射文件包名和位置 -->
+		<sqlMapGenerator targetPackage="mapper"
+		                 targetProject="src/main/resources" >
+			<property name="enableSubPackages" value="true" />
+		</sqlMapGenerator >
+		<!-- 生成Mapper的包名和位置 -->
+		<javaClientGenerator type="XMLMAPPER"
+		                     targetPackage="com.angelachen.myhome.mapper" targetProject="src/main/java" >
+			<property name="enableSubPackages" value="true" />
+
+		</javaClientGenerator >
+		<!-- 要生成那些表(更改tableName和domainObjectName就可以) -->
+		<!-- enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false"
+			enableSelectByExample="false" selectByExampleQueryId="false" -->
+		<table tableName="user" domainObjectName="UserEntity"
+		       enableCountByExample="true" enableUpdateByExample="true"
+		       enableDeleteByExample="true" enableSelectByExample="true"
+		       selectByExampleQueryId="true" >
+			<property name="useActualColumnNames" value="true" />
+			<columnOverride column="isDelete" property="delete" javaType="Boolean" />
+		</table >
+		<!--
+		 <table tableName="check_record" domainObjectName="CheckRecordEntity"
+				enableCountByExample="false" enableUpdateByExample="false"
+				enableDeleteByExample="false" enableSelectByExample="false"
+				selectByExampleQueryId="false" >
+			 &lt;!&ndash; 如果设置为true，生成的model类会直接使用column本身的名字，而不会再使用驼峰命名方法，比如BORN_DATE，生成的属性名字就是BORN_DATE,而不会是bornDate &ndash;&gt;
+			 <property name="useActualColumnNames" value="true"/>
+		 </table> -->
+	</context >
+</generatorConfiguration >

@@ -11,7 +11,7 @@ public interface ImageService {
     /**
      * 保持上传的文件
      *
-     * @param multipartFile
+     * @param multipartFile 上传的文件
      * @return 保存的文件id
      */
     Integer saveUploadImage(MultipartFile multipartFile, User user);

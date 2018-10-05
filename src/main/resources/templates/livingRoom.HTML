@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<link rel="stylesheet" href="/static/layui/css/layui.css" th:href="@{/layui/css/layui.css}" media="all">
+<link rel="stylesheet" href="/static/css/common.css" th:href="@{/css/common.css}">
+<style>
+	.img {
+		border: 1px solid red;
+	}
+
+	.carousel-room {
+		display: inline-block;
+		float: left;
+		margin: 0;
+		padding: 5px;
+	}
+
+	.main-left {
+		float: left;
+		width: 60%;
+	}
+
+	.main-right {
+		float: left;
+		width: 40%;
+	}
+
+	.float-left {
+		float: left;
+	}
+</style>
+<head>
+	<meta charset="UTF-8">
+	<title>客厅</title>
+</head>
+<body>
+<div class="middle" style="width: 80%;">
+
+	<th:block th:replace="fregment/header.HTML :: header-bar"/>
+	<div class="main-left">
+		<div class="layui-carousel carousel-room">
+			<div carousel-item>
+				<div>条目1</div>
+				<div>条目4</div>
+				<div>条目5</div>
+			</div>
+		</div>
+
+		<div class="layui-carousel carousel-room">
+			<div carousel-item>
+				<div>条目1</div>
+				<div>条目4</div>
+				<div>条目5</div>
+			</div>
+		</div>
+
+		<div class="layui-carousel carousel-room">
+			<div carousel-item>
+				<div>条目1</div>
+				<div>条目4</div>
+				<div>条目5</div>
+			</div>
+		</div>
+
+		<div class="layui-carousel carousel-room">
+			<div carousel-item>
+				<div>条目1</div>
+				<div>条目4</div>
+				<div>条目5</div>
+			</div>
+		</div>
+
+		<div class="middle layui-col-space8 float-left" style="margin-top: 10px">
+			<div class="img layui-col-md2"> img</div>
+			<div class="img layui-col-md2"> img</div>
+			<div class="img layui-col-md2"> img</div>
+			<div class="img layui-col-md2"> img</div>
+			<div class="img layui-col-md2"> img</div>
+			<div class="img layui-col-md2"> img</div>
+			<div class="img layui-col-md2"> img</div>
+		</div>
+	</div>
+	<div class="main-right">
+		<fieldset class="layui-elem-field layui-field-title" style="margin-top: 30px;">
+			<legend>留言板</legend>
+		</fieldset>
+		<div class="message-contain">
+			<ul class="layui-timeline">
+				<li class="layui-timeline-item">
+					<div class="layui-timeline-content layui-text">
+						<p class="layui-timeline-title">2018-10-28 10:10:10 小悦</p>
+						新欢快给安排将
+					</div>
+				</li>
+				<li class="layui-timeline-item">
+					<div class="layui-timeline-content layui-text">
+						<p class="layui-timeline-title">2018-10-28 10:10:10 小悦</p>
+						新欢快给安排将
+					</div>
+				</li>
+				<li class="layui-timeline-item">
+					<div class="layui-timeline-content layui-text">
+						<p class="layui-timeline-title">2018-10-28 10:10:10 小悦</p>
+						新欢快给安排将
+					</div>
+				</li>
+			</ul>
+		</div>
+
+		<div class="layui-form-item layui-form-text margin-clean">
+			<div class="layui-input-block ">
+				<textarea placeholder="我要留言" class="layui-textarea" name="desc"></textarea>
+			</div>
+			<div class="layui-input-block" style="margin-top: 10px">
+				<button class="layui-btn" lay-submit="" lay-filter="demo1">我要留言</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<th:block th:replace="fregment/bottom.HTML :: footer-bar"/>
+
+
+<script th:src="@{/js/lib/jquery-1.11.2.min.js}" src="/static/js/lib/jquery-1.11.2.min.js"></script>
+<script src="/static/layui/layui.js" th:src="@{/layui/layui.js}" charset="utf-8"></script>
+<script>
+    layui.use('carousel', function () {
+        var carousel = layui.carousel;
+        var renderArray = [];
+        var $carouselEle = $(".carousel-room");
+        $carouselEle.each(function (i, item) {
+            //建造实例
+            var rend = carousel.render({
+                elem: item
+                , width: '200px' //设置容器宽度
+                , height: '200px'
+                , arrow: 'hover' //始终显示箭头
+                , indicator: 'none'
+                , interval: "3000"
+            });
+            renderArray.push(rend);
+        })
+        $carouselEle.mouseover(function () {
+            $.each(renderArray, function (i, item) {
+                item.reload({autoplay: false})
+            })
+        })
+        $carouselEle.mouseout(function () {
+            $.each(renderArray, function (i, item) {
+                item.reload({autoplay: true})
+            })
+        })
+    });
+
+
+    layui.use('element', function () {
+        var $ = layui.jquery
+            , element = layui.element; //Tab的切换功能，切换事件监听等，需要依赖element模块
+        //Hash地址的定位
+        var layid = location.hash.replace(/^#test=/, '');
+        element.tabChange('test', layid);
+
+        element.on('tab(test)', function (elem) {
+            location.hash = 'test=' + $(this).attr('lay-id');
+        });
+
+    });
+
+
+</script>
+</body>
+</html>

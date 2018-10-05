@@ -26,13 +26,14 @@ public class UserServiceImpl implements UserService {
         final UserEntityExample.Criteria criteria = userEntityExample.createCriteria();
         criteria.andNameEqualTo(userName);
         final UserEntity userEntities = userEntityMapper.selectByUserName(userName);
-        if (password.equals(userEntities.getPassword())) {
-            User user = new User();
-            user.setId(userEntities.getId());
-            user.setName(userEntities.getName());
-            user.setPassword(userEntities.getPassword());
-            return user;
+        if (userEntities == null || !password.equals(userEntities.getPassword())) {
+            throw new AccessException("access denied for userName : " + userName);
         }
-        throw new AccessException("access denied for userName : " + userName);
+
+        User user = new User();
+        user.setId(userEntities.getId());
+        user.setName(userEntities.getName());
+        user.setPassword(userEntities.getPassword());
+        return user;
     }
 }

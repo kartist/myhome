@@ -4,12 +4,14 @@ import com.angelachen.myhome.common.model.JsonResult;
 import com.angelachen.myhome.common.model.User;
 import com.angelachen.myhome.common.util.UserUtil;
 import com.angelachen.myhome.service.UserService;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.List;
@@ -22,13 +24,14 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/user/")
+@Validated
 public class UserController {
 
     @Resource
     private UserService userService;
 
     @RequestMapping("login")
-    public JsonResult doLogin(String userName, String password, HttpServletRequest request) {
+    public JsonResult doLogin(@NotNull String userName, @NotNull String password, HttpServletRequest request) {
         HttpSession session = request.getSession();
         User user = userService.doLogin(userName, password);
         session.setAttribute(UserUtil.SESSION_USER, user);

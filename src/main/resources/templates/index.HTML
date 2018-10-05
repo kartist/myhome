@@ -1,12 +1,77 @@
 <!DOCTYPE html>
 <html lang="en"
       xmlns="http://www.w3.org/1999/xhtml"
->
+      xmlns:th="http://www.thymeleaf.org">
+<meta name="renderer" content="webkit">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<link rel="stylesheet" href="/static/layui/css/layui.css" th:href="@{/layui/css/layui.css}" media="all">
+<link rel="stylesheet" href="/static/css/common.css" th:href="@{/css/common.css}">
 <head>
 	<meta charset="UTF-8">
-	<title>Title</title>
+	<title>欢迎朋友们</title>
 </head>
 <body>
 
+
+<div class="middle">
+	<div class="layui-container">
+		<div class="title">
+			<h2>欢迎你!Angela的朋友~</h2>
+		</div>
+		<div class="layui-form middle" style="width: 300px">
+			<div class="layui-row">
+				<div class=" keep-line middle">
+					<input type="text" name="userName" required lay-verify="required" placeholder="我是..."
+					       autocomplete="off"
+					       class="layui-input keep-line">
+					<input type="text" name="password" required lay-verify="required" placeholder="暗号..."
+					       autocomplete="off"
+					       class="layui-input keep-line">
+				</div>
+				<div class="layui-form-item">
+					<div class="layui-input-block ">
+						<button class="layui-btn keep-line" lay-submit lay-filter="login">欢迎~</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<th:block th:replace="fregment/bottom.HTML :: footer-bar"/>
+
+<script th:src="@{/js/lib/jquery-1.11.2.min.js}" src="/static/js/lib/jquery-1.11.2.min.js"></script>
+<script src="/static/layui/layui.js" th:src="@{/layui/layui.js}" charset="utf-8"></script>
+
+<script>
+    var layer;
+
+    layui.use('layer', function () {
+        layer = layui.layer;
+    });
+
+
+    layui.use('form', function () {
+        var form = layui.form;
+        //各种基于事件的操作，下面会有进一步介绍
+
+        form.on('submit(login)', function (data) {
+            $.post("/user/login", data.field, function (data) {
+                if (data.state == 1) {
+                    layer.msg("欢迎...请随我来!", {time: 1000}, function () {
+                        window.location.href = "/home/index";
+                    })
+                } else {
+                    layer.msg('对不起朋友,请检查输入是否有误');
+                    return false;
+                }
+            });
+        });
+    });
+
+
+</script>
 </body>
 </html>

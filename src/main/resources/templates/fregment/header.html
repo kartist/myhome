@@ -7,10 +7,11 @@
 	<title>Title</title>
 </head>
 <body>
-<th:block th:fragment="header-bar">
+<th:block th:fragment="header-bar(enable)">
 	<div class="header-right">
-		<span id="header-say-bye-id" class="hover-color" style="cursor: pointer; mouse">跟Angela说再见</span>
-		<span class=".hover-color header-right-back" th:if="${showBack} == true"> 后院 </span>
+		<span id="header-say-bye-id" class="hover-color">跟Angela说再见</span>
+		<span class="hover-color header-right-back" th:if="${showBack} == true and *{enable}==true"
+		      onclick="toBackYard()"> 后院 </span>
 	</div>
 	<div class="header">
 		<span> Hello [[${name}]] </span>
@@ -22,8 +23,13 @@
 			color: #009688;
 		}
 
+		.hover-color {
+			cursor: pointer;
+		}
+
 		.header-right-back {
 			margin: 0 10px 0 10px;
+			cursor: pointer;
 		}
 	</style>
 </th:block>
@@ -52,9 +58,11 @@
                 })
 
             });
-
-
         })
+
+        function toBackYard() {
+            window.location.href = '/backyard';
+        }
 	</script>
 </th:block>
 </body>

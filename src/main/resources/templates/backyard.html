@@ -6,13 +6,20 @@
 	<meta charset="UTF-8">
 	<title>Title</title>
 
+	<link rel="stylesheet" href="/static/layui/css/layui.css" th:href="@{/layui/css/layui.css}" media="all">
+	<link rel="stylesheet" href="/static/css/common.css" th:href="@{/css/common.css}">
 	<th:block th:replace="fregment/header.HTML :: header-css"/>
 </head>
 <body>
-<th:block th:replace="fregment/header.HTML :: header-bar"/>
+<div class="middle" style="width: 80%;">
+
+	<th:block th:replace="fregment/header.HTML :: header-bar(false)"/>
 
 
-<th:block th:replace="fregment/bottom.HTML :: footer-bar"/>
+	<th:block th:replace="fregment/bottom.HTML :: footer-bar"/>
+
+</div>
+
 <script th:src="@{/js/lib/jquery-1.11.2.min.js}" src="/static/js/lib/jquery-1.11.2.min.js"></script>
 <script src="/static/layui/layui.js" th:src="@{/layui/layui.js}" charset="utf-8"></script>
 

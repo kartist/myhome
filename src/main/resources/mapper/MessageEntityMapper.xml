@@ -162,6 +162,19 @@
 			<include refid="Example_Where_Clause" />
 		</if >
 	</select >
+	<select id="countAll" resultType="java.lang.Integer" >
+		select count(*) from message
+	</select >
+	<select id="selectDtoList" resultType="com.angelachen.myhome.common.dto.CommentListDto" >
+		select
+		createTime,
+		userName as userName,
+		content
+		from message
+		where isDelete = 0
+		order by createTime asc
+		limit #{pageObject.startIndex} , #{pageObject.pageSize}
+	</select >
 	<update id="updateByExampleSelective" parameterType="map" >
 		update message
 		<set >

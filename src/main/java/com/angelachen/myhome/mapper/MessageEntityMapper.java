@@ -1,5 +1,7 @@
 package com.angelachen.myhome.mapper;
 
+import com.angelachen.myhome.common.dto.CommentListDto;
+import com.angelachen.myhome.common.model.PageObject;
 import com.angelachen.myhome.entity.MessageEntity;
 import com.angelachen.myhome.entity.MessageEntityExample;
 import org.apache.ibatis.annotations.Param;
@@ -28,4 +30,8 @@ public interface MessageEntityMapper {
     int updateByPrimaryKeySelective(MessageEntity record);
 
     int updateByPrimaryKey(MessageEntity record);
+
+    int countAll();
+
+    List<CommentListDto> selectDtoList(@Param("pageObject") PageObject pageObject);
 }

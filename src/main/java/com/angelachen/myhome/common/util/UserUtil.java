@@ -31,6 +31,7 @@ public class UserUtil {
         if (user == null) {
             throw new AccessException("用户未登陆");
         }
+        session.setAttribute("showBack", user.isShowBack());
         return user;
     }
 }

@@ -38,7 +38,7 @@ public class UserController {
         return new JsonResult();
     }
 
-    @RequestMapping()
+    @RequestMapping("logout")
     public JsonResult logOut(HttpServletRequest request) {
         HttpSession session = request.getSession();
         final Enumeration<String> attributeNames = session.getAttributeNames();

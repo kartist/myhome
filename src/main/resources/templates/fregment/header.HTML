@@ -9,12 +9,53 @@
 <body>
 <th:block th:fragment="header-bar">
 	<div class="header-right">
-		<span>跟Angela说再见</span>
-		<span style="margin-left: 10px; display: none"> 后院 </span>
+		<span id="header-say-bye-id" class="hover-color" style="cursor: pointer; mouse">跟Angela说再见</span>
+		<span class=".hover-color header-right-back" th:if="${showBack} == true"> 后院 </span>
 	</div>
 	<div class="header">
 		<span> Hello [[${name}]] </span>
 	</div>
+</th:block>
+<th:block th:fragment="header-css">
+	<style>
+		.hover-color:hover {
+			color: #009688;
+		}
+
+		.header-right-back {
+			margin: 0 10px 0 10px;
+		}
+	</style>
+</th:block>
+
+<th:block th:fragment="header-js">
+	<script>
+        $("#header-say-bye-id").on('click', function () {
+            layui.use('layer', function () {
+                layer = layui.layer;
+                layer.confirm("朋友,不再坐会聊聊天了吗?", {
+                    title: '',
+                    btn: ['我再坐会', '我准备回去了'],
+                    closeBtn: 0
+                }, function (idx) {
+                    layer.close(idx);
+                }, function () {
+                    $.post("/user/logout", {}, function (result) {
+                        if (result.state == 1) {
+                            layer.msg("再见朋友,一路顺风", function () {
+                                window.location.href = "/";
+                            })
+                        }
+                    });
+
+
+                })
+
+            });
+
+
+        })
+	</script>
 </th:block>
 </body>
 </html>

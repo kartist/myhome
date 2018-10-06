@@ -14,4 +14,9 @@ public class User {
 
     private String password;
 
+    /**
+     * 标识是否允许进入后台
+     */
+    private boolean showBack = false;
+
 }

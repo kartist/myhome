@@ -22,4 +22,5 @@ public class UserEntity {
 
     private Date lastLoginTime;
 
+    private Boolean showBack;
 }

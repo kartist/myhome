@@ -10,6 +10,7 @@
 		<result column="address" jdbcType="VARCHAR" property="address" />
 		<result column="note" jdbcType="VARCHAR" property="note" />
 		<result column="lastLoginTime" jdbcType="TIMESTAMP" property="lastLoginTime" />
+		<result column="showBack" jdbcType="INTEGER" property="showBack" />
 	</resultMap >
 	<sql id="Example_Where_Clause" >
 		<where >
@@ -72,7 +73,7 @@
 		</where >
 	</sql >
 	<sql id="Base_Column_List" >
-    id, createTime, name, password, phone, address, note, lastLoginTime
+    id, createTime, name, password, phone, address, note, lastLoginTime ,showBack
   </sql >
 	<select id="selectByExample" parameterType="com.angelachen.myhome.entity.UserEntityExample"
 	        resultMap="BaseResultMap" >
@@ -252,6 +253,9 @@
 			<if test="lastLoginTime != null" >
 				lastLoginTime = #{lastLoginTime,jdbcType=TIMESTAMP},
 			</if >
+			<if test="showBack != null" >
+				showBack = #{showBack,jdbcType=INTEGER},
+			</if >
 		</set >
 		where id = #{id,jdbcType=INTEGER}
 	</update >
@@ -263,7 +267,8 @@
       phone = #{phone,jdbcType=VARCHAR},
       address = #{address,jdbcType=VARCHAR},
       note = #{note,jdbcType=VARCHAR},
-      lastLoginTime = #{lastLoginTime,jdbcType=TIMESTAMP}
+      lastLoginTime = #{lastLoginTime,jdbcType=TIMESTAMP},
+      showBack = #{showBack,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update >
 </mapper >

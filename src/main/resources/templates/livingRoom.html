@@ -90,7 +90,7 @@
 	</div>
 	<div class="main-right">
 		<fieldset class="layui-elem-field layui-field-title" style="margin-top: 30px;">
-			<legend>留1言板</legend>
+			<legend>留言板</legend>
 		</fieldset>
 		<div class="message-contain" id="message-contain-id">
 			<ul class="layui-timeline" id="message-contain-ul-id">
@@ -260,7 +260,7 @@
 
     //将留言数据追加到留言板
     function renderCommentData(data) {
-        var dataHtml = '<li class="layui-timeline-item layui-anim layui-anim-up">' +
+        var dataHtml = '<li class="layui-timeline-item layui-anim layui-anim-scale">' +
             '<div class="layui-timeline-content layui-text">' +
             '<p class="layui-timeline-title">' +
             data.createTime + ' ' + data.userName +
@@ -276,7 +276,6 @@
     function pullScroll(elem) {
         elem.scrollTop = elem.scrollHeight;
     }
-
 
     initCommentData();
 

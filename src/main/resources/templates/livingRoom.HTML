@@ -214,8 +214,13 @@
     //保存一条留言
     function saveMessage(content) {
         $.post("/comment/save", {content: content}, function (result) {
-            if (result.state == 1) {
+            var state = result.state;
+            if (state == 1) {
                 initCommentData();
+                return;
+            }
+            if (state == 401) {
+                window.location.href = "/";
             }
         })
     }

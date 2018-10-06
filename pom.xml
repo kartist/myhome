@@ -59,11 +59,11 @@
 			<groupId >org.projectlombok</groupId >
 			<artifactId >lombok</artifactId >
 		</dependency >
-
+		<!--fast json-->
 		<dependency >
-			<groupId >org.springframework.boot</groupId >
-			<artifactId >spring-boot-devtools</artifactId >
-			<optional >true</optional >
+			<groupId >com.alibaba</groupId >
+			<artifactId >fastjson</artifactId >
+			<version >1.2.29</version >
 		</dependency >
 	</dependencies >
 

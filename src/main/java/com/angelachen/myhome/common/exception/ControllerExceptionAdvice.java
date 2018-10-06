@@ -18,6 +18,12 @@ public class ControllerExceptionAdvice {
         return new JsonResult(e.getMessage());
     }
 
+    @ExceptionHandler(value = AccessException.class)
+    public JsonResult adviceAccessException(AccessException e) {
+        log.warn("access no permission ", e);
+        return new JsonResult(JsonResult.ResultState.ACCESS_REFUSED);
+    }
+
     @ExceptionHandler(value = Exception.class)
     public JsonResult adviceException(Exception e) {
         log.error(" exception : {}", e);

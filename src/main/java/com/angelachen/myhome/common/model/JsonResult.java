@@ -13,6 +13,7 @@ public class JsonResult {
 
     public enum ResultState {
         SUCCESS(1, "OK"),
+        ACCESS_REFUSED(401, "NO PERMISSION"),
         SERVER_ERROR(500, "ERROR");
 
         private int code;

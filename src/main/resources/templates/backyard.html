@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<title>Title</title>
+
+	<th:block th:replace="fregment/header.HTML :: header-css"/>
+</head>
+<body>
+<th:block th:replace="fregment/header.HTML :: header-bar"/>
+
+
+<th:block th:replace="fregment/bottom.HTML :: footer-bar"/>
+<script th:src="@{/js/lib/jquery-1.11.2.min.js}" src="/static/js/lib/jquery-1.11.2.min.js"></script>
+<script src="/static/layui/layui.js" th:src="@{/layui/layui.js}" charset="utf-8"></script>
+
+<th:block th:replace="fregment/header.HTML :: header-js"/>
+</body>
+</html>

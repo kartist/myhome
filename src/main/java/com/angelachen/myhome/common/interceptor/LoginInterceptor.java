@@ -34,6 +34,7 @@ public class LoginInterceptor implements HandlerInterceptor {
             }
             return false;
         }
+        request.setAttribute("showBack", user.isShowBack());
         return true;
     }
 }

@@ -34,7 +34,7 @@ public class UserServiceImpl implements UserService {
         user.setId(userEntities.getId());
         user.setName(userEntities.getName());
         user.setPassword(userEntities.getPassword());
-        user.setShowBack(userEntities.getId() == 0);
+        user.setShowBack(userEntities.getShowBack());
         return user;
     }
 }

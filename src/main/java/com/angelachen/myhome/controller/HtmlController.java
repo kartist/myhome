@@ -18,13 +18,6 @@ public class HtmlController {
         return "index";
     }
 
-
-    @GetMapping("/comment.html")
-    public String commentHtml() {
-
-        return "comment/index";
-    }
-
     @GetMapping("/home/index")
     public String livingRoom(HttpServletRequest request) {
         User user = UserUtil.getGoodUser(request);
@@ -32,4 +25,8 @@ public class HtmlController {
         return "livingRoom";
     }
 
+    @GetMapping("/backyard")
+    public String backyard() {
+        return "backyard";
+    }
 }

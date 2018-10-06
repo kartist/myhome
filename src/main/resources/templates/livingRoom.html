@@ -19,12 +19,13 @@
 
 	.main-left {
 		float: left;
-		width: 60%;
+		width: 50%;
+		margin-top: 40px;
 	}
 
 	.main-right {
 		float: right;
-		width: 40%;
+		width: 50%;
 	}
 
 	.float-left {
@@ -33,7 +34,19 @@
 
 	.message-contain {
 		overflow-y: auto;
-		height: 300px;
+		height: 250px;
+	}
+
+	.banner {
+		height: 550px;
+	}
+
+	.banner-after {
+
+	}
+
+	.layui-input-block textarea {
+		min-height: 85px;
 	}
 </style>
 <th:block th:replace="fregment/header.HTML :: header-css"/>
@@ -45,84 +58,88 @@
 <div class="middle" style="width: 80%;">
 
 	<th:block th:replace="fregment/header.HTML :: header-bar"/>
-	<div class="main-left">
-		<div class="layui-carousel carousel-room">
-			<div carousel-item>
-				<div>条目1</div>
-				<div>条目4</div>
-				<div>条目5</div>
+	<div class="banner">
+		<div class="main-left">
+			<div class="layui-carousel carousel-room">
+				<div carousel-item>
+					<div>条目1</div>
+					<div>条目4</div>
+					<div>条目5</div>
+				</div>
+			</div>
+
+			<div class="layui-carousel carousel-room">
+				<div carousel-item>
+					<div>条目1</div>
+					<div>条目4</div>
+					<div>条目5</div>
+				</div>
+			</div>
+
+			<div class="layui-carousel carousel-room">
+				<div carousel-item>
+					<div>条目1</div>
+					<div>条目4</div>
+					<div>条目5</div>
+				</div>
+			</div>
+
+			<div class="layui-carousel carousel-room">
+				<div carousel-item>
+					<div>条目1</div>
+					<div>条目4</div>
+					<div>条目5</div>
+				</div>
 			</div>
 		</div>
-
-		<div class="layui-carousel carousel-room">
-			<div carousel-item>
-				<div>条目1</div>
-				<div>条目4</div>
-				<div>条目5</div>
+		<div class="main-right">
+			<fieldset class="layui-elem-field layui-field-title" style="margin-top: 30px;">
+				<legend>留言板</legend>
+			</fieldset>
+			<div class="message-contain" id="message-contain-id">
+				<ul class="layui-timeline" id="message-contain-ul-id">
+					<li class="layui-timeline-item">
+						<div class="layui-timeline-content layui-text">
+							<p class="layui-timeline-title">2018-10-28 10:10:10 小悦</p>
+							小水新婚快乐哦
+						</div>
+					</li>
+					<li class="layui-timeline-item">
+						<div class="layui-timeline-content layui-text">
+							<p class="layui-timeline-title">2018-10-28 10:10:09 小锐</p>
+							小水新婚快乐哦
+						</div>
+					</li>
+					<li class="layui-timeline-item">
+						<div class="layui-timeline-content layui-text">
+							<p class="layui-timeline-title">2018-10-28 10:10:08 小四</p>
+							小水新婚快乐哦
+						</div>
+					</li>
+				</ul>
 			</div>
-		</div>
 
-		<div class="layui-carousel carousel-room">
-			<div carousel-item>
-				<div>条目1</div>
-				<div>条目4</div>
-				<div>条目5</div>
-			</div>
-		</div>
-
-		<div class="layui-carousel carousel-room">
-			<div carousel-item>
-				<div>条目1</div>
-				<div>条目4</div>
-				<div>条目5</div>
-			</div>
-		</div>
-
-		<div class="middle layui-col-space8 float-left" style="margin-top: 10px">
-			<div class="img layui-col-md2"> img</div>
-			<div class="img layui-col-md2"> img</div>
-			<div class="img layui-col-md2"> img</div>
-			<div class="img layui-col-md2"> img</div>
-			<div class="img layui-col-md2"> img</div>
-			<div class="img layui-col-md2"> img</div>
-			<div class="img layui-col-md2"> img</div>
-		</div>
-	</div>
-	<div class="main-right">
-		<fieldset class="layui-elem-field layui-field-title" style="margin-top: 30px;">
-			<legend>留言板</legend>
-		</fieldset>
-		<div class="message-contain" id="message-contain-id">
-			<ul class="layui-timeline" id="message-contain-ul-id">
-				<li class="layui-timeline-item">
-					<div class="layui-timeline-content layui-text">
-						<p class="layui-timeline-title">2018-10-28 10:10:10 小悦</p>
-						小水新婚快乐哦
-					</div>
-				</li>
-				<li class="layui-timeline-item">
-					<div class="layui-timeline-content layui-text">
-						<p class="layui-timeline-title">2018-10-28 10:10:09 小锐</p>
-						小水新婚快乐哦
-					</div>
-				</li>
-				<li class="layui-timeline-item">
-					<div class="layui-timeline-content layui-text">
-						<p class="layui-timeline-title">2018-10-28 10:10:08 小四</p>
-						小水新婚快乐哦
-					</div>
-				</li>
-			</ul>
-		</div>
-
-		<div class="layui-form layui-form-item layui-form-text margin-clean">
-			<div class="layui-input-block ">
+			<div class="layui-form layui-form-item layui-form-text margin-clean">
+				<div class="layui-input-block ">
 				<textarea placeholder="此时此刻,你最想说什么?" class="layui-textarea" name="content"
 				          lay-verify="message"></textarea>
+				</div>
+				<div class="layui-input-block" style="margin-top: 10px">
+					<button class="layui-btn" lay-submit lay-filter="message">我要留言</button>
+				</div>
 			</div>
-			<div class="layui-input-block" style="margin-top: 10px">
-				<button class="layui-btn" lay-submit lay-filter="message">我要留言</button>
-			</div>
+		</div>
+	</div>
+
+	<div class="middle banner-after">
+		<div class="middle layui-col-space8 float-left">
+			<div class="img layui-col-md2"> img</div>
+			<div class="img layui-col-md2"> img</div>
+			<div class="img layui-col-md2"> img</div>
+			<div class="img layui-col-md2"> img</div>
+			<div class="img layui-col-md2"> img</div>
+			<div class="img layui-col-md2"> img</div>
+			<div class="img layui-col-md2"> img</div>
 		</div>
 	</div>
 </div>

@@ -8,7 +8,6 @@ spring:
         driver-class-name: com.mysql.jdbc.Driver
     thymeleaf:
       cache: false
-      suffix: .HTML
     jackson:
       date-format: yyyy-MM-dd HH:mm:ss
 mybatis:

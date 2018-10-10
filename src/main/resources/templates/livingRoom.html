@@ -9,6 +9,7 @@
 	.roll-img {
 
 	}
+
 	.carousel-room {
 		display: inline-block;
 		float: left;
@@ -34,6 +35,7 @@
 	.main-right-content {
 		width: 450px;
 	}
+
 	.float-left {
 		float: left;
 	}
@@ -194,12 +196,6 @@
     function saveMessage(content) {
         $.post("/comment/save", {content: content}, function (result) {
             var state = result.state;
-            if (state == 1) {
-                renderCommentData(result.data);
-                $(".layui-textarea").val('');
-
-                return;
-            }
             if (state == 401) {
                 window.location.href = "/";
             }
@@ -257,6 +253,35 @@
     }
 
     initCommentData();
+
+    //socket 相关
+    var currentUrl = window.location.host;
+    var socketUrl = 'ws://' + currentUrl.replace("http://", "") + "/message";
+    var socket = new WebSocket(socketUrl);
+    socket.onopen = function () {
+        console.log("Socket 已打开");
+    };
+    //获得消息事件
+    socket.onmessage = function (msg) {
+        var strData = msg.data;
+        var comment = $.parseJSON(strData);
+        renderCommentData(comment);
+        $(".layui-textarea").val('');
+    };
+    //关闭事件
+    socket.onclose = function () {
+        console.log("Socket已关闭");
+    };
+
+    //发生了错误事件
+    socket.onerror = function () {
+        console("Socket发生了错误");
+    };
+
+    $(window).unload(function () {
+        socket.close();
+    });
+
 
 </script>
 

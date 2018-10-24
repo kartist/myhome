@@ -15,3 +15,5 @@ mybatis:
 config:
     file:
         prefix : F:/test/
+logging:
+  config: classpath:logback-spring.xml

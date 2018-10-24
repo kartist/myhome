@@ -8,9 +8,7 @@ import com.angelachen.myhome.common.util.UserUtil;
 import com.angelachen.myhome.service.ImageService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
@@ -46,6 +44,13 @@ public class ImageController {
     public void download(@NotNull Integer imgId, HttpServletResponse response) throws IOException {
         ImageDto image = imageService.getImageDtoById(imgId);
         HttpUtil.responseImage(image.getFilePath(), image.getSuffix(), response);
+    }
+
+
+    @RequestMapping(value = "get/{imgId}", method = {RequestMethod.GET, RequestMethod.POST})
+    public JsonResult list(@PathVariable("imgId") String imgId) throws IOException {
+        ImageDto image = imageService.getImageDtoById(Integer.parseInt(imgId));
+        return new JsonResult(image);
     }
 
 

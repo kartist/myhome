@@ -54,7 +54,8 @@ public class ImageServiceImpl implements ImageService {
 
         String suffix = getFileSuffix(fileName);
 
-        File dest = new File(filePrefix + UUID.randomUUID().toString());
+        String fileId = UUID.randomUUID().toString();
+        File dest = new File(filePrefix + fileId);
         if (!dest.getParentFile().exists()) { //判断文件父目录是否存在
             dest.getParentFile().mkdir();
         }
@@ -65,7 +66,7 @@ public class ImageServiceImpl implements ImageService {
             ImageDto imageDto = new ImageDto();
             imageDto.setFileName(fileName);
             imageDto.setUploadTime(new Date());
-            imageDto.setFilePath(dest.getPath());
+            imageDto.setFilePath(fileId);
             imageDto.setSuffix(suffix.toLowerCase());
 
             return imageRepository.createRecord(imageDto, user);

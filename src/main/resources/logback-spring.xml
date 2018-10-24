@@ -95,12 +95,11 @@
 	<logger name="org" level="INFO" />
 	<logger name="springfox.documentation" level="INFO" />
 
-	<logger name="com.jtg.baike.quiz.mapper" level="DEBUG" />
-	<logger name="com.jtg.baike.quiz.*.controller" level="INFO" />
+	<logger name="com.angelachen.myhome" level="DEBUG" />
 
 	<!--生产环境:打印控制台和输出到文件-->
 	<springProfile name="prod" >
-		<root level="info" >
+		<root level="DEBUG" >
 			<appender-ref ref="STDOUT" />
 			<appender-ref ref="FILE" />
 			<appender-ref ref="logstash" />
@@ -116,13 +115,5 @@
 		</root >
 	</springProfile >
 
-	<springProfile name="test" >
-		<root level="DEBUG" >
-			<appender-ref ref="STDOUT" />
-			<appender-ref ref="logstash" />
-			<appender-ref ref="FILE" />
-		</root >
-		<!-- <appender-ref ref="asyncFileAppender"/>-->
-	</springProfile >
 
 </configuration >

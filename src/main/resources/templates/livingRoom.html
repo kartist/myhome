@@ -71,13 +71,7 @@
 		<div class="main-left">
 			<div class="middle main-left-content">
 				<div class="layui-carousel carousel-room" id="carousel-id-1">
-					<div carousel-item>
-						<img class="roll-img layui-col-md2"
-						     src="https://image.zhangxinxu.com/image/blog/201602/chuanyue.jpg"/>
-						<img class="roll-img layui-col-md2"
-						     src="https://image.zhangxinxu.com/image/blog/201602/chuanyue.jpg"/>
-						<img class="roll-img layui-col-md2"
-						     src="https://image.zhangxinxu.com/image/blog/201602/chuanyue.jpg"/>
+					<div carousel-item id="carouse-div-id">
 						<img class="roll-img layui-col-md2"
 						     src="https://image.zhangxinxu.com/image/blog/201602/chuanyue.jpg"/>
 					</div>
@@ -110,16 +104,7 @@
 	</div>
 
 	<div class="middle banner-after">
-		<div class="">
-			<img class="img layui-col-md2" src="https://image.zhangxinxu.com/image/blog/201602/chuanyue.jpg"/>
-			<img class="img layui-col-md2" src="https://image.zhangxinxu.com/image/blog/201602/chuanyue.jpg"/>
-			<img class="img layui-col-md2" src="https://image.zhangxinxu.com/image/blog/201602/chuanyue.jpg"/>
-			<img class="img layui-col-md2" src="https://image.zhangxinxu.com/image/blog/201602/chuanyue.jpg"/>
-			<img class="img layui-col-md2" src="https://image.zhangxinxu.com/image/blog/201602/chuanyue.jpg"/>
-			<img class="img layui-col-md2" src="https://image.zhangxinxu.com/image/blog/201602/chuanyue.jpg"/>
-			<img class="img layui-col-md2" src="https://image.zhangxinxu.com/image/blog/201602/chuanyue.jpg"/>
-			<img class="img layui-col-md2" src="https://image.zhangxinxu.com/image/blog/201602/chuanyue.jpg"/>
-			<img class="img layui-col-md2" src="https://image.zhangxinxu.com/image/blog/201602/chuanyue.jpg"/>
+		<div class="" id="imgList-div-id">
 			<img class="img layui-col-md2" src="https://image.zhangxinxu.com/image/blog/201602/chuanyue.jpg"/>
 		</div>
 	</div>
@@ -275,13 +260,48 @@
 
     //发生了错误事件
     socket.onerror = function () {
-        console("Socket发生了错误");
+        console.log("Socket发生了错误");
     };
 
     $(window).unload(function () {
         socket.close();
     });
 
+
+</script>
+<script>
+    // 图片展示
+    $.post("/img/list", {type: 1}, function (res) {
+        if (res.state !== 1) {
+            console.log("res failed")
+            return;
+        }
+        var imgList = res.data;
+        $("#carouse-div-id").html('')
+        $.each(imgList, function (i, n) {
+            var path = n.filePath;
+            var html = '<img class="roll-img layui-col-md2"' +
+                'src="http://file.angelachen.cn/' + path + '.' + n.suffix + '"/>'
+            $("#carouse-div-id").append(html);
+        })
+
+    })
+
+
+    $.post("/img/list", {type: 2}, function (res) {
+        if (res.state !== 1) {
+            console.log("res failed")
+            return;
+        }
+        var imgList = res.data;
+        $("#imgList-div-id").html('')
+        $.each(imgList, function (i, n) {
+            var path = n.filePath;
+            var html = '<img class="roll-img layui-col-md2"' +
+                'src="http://file.angelachen.cn/' + path + '.' + n.suffix + '"/>'
+            $("#imgList-div-id").append(html);
+        })
+    })
 
 </script>
 

@@ -1,5 +1,6 @@
 package com.angelachen.myhome.mapper;
 
+import com.angelachen.myhome.common.dto.ImageDto;
 import com.angelachen.myhome.entity.ImageLibEntity;
 import com.angelachen.myhome.entity.ImageLibExample;
 import org.apache.ibatis.annotations.Param;
@@ -18,6 +19,10 @@ public interface ImageLibMapper {
     int insertSelective(ImageLibEntity record);
 
     List<ImageLibEntity> selectByExample(ImageLibExample example);
+
+    List<ImageDto> selectLimit(int limit);
+
+    List<ImageDto> selectAll();
 
     ImageLibEntity selectByPrimaryKey(Integer id);
 

@@ -62,6 +62,14 @@ public class ImageController {
      */
     @PostMapping("list")
     public JsonResult imgList(Integer type) {
+
+        if (type == 1) {
+            return new JsonResult(imageService.roundList());
+        }
+        if (type == 2) {
+            return new JsonResult(imageService.all());
+        }
+
         return new JsonResult();
     }
 

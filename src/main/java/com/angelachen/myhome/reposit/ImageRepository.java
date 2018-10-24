@@ -3,10 +3,12 @@ package com.angelachen.myhome.reposit;
 import com.angelachen.myhome.common.dto.ImageDto;
 import com.angelachen.myhome.common.model.User;
 import com.angelachen.myhome.entity.ImageLibEntity;
+import com.angelachen.myhome.entity.ImageLibExample;
 import com.angelachen.myhome.mapper.ImageLibMapper;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * @author Kartist 2018/10/4 14:34
@@ -27,5 +29,12 @@ public class ImageRepository {
 
         imageLibMapper.insertSelective(imageLibEntity);
         return imageLibEntity.getId();
+    }
+
+    public List<ImageDto> getRoundList(Integer number) {
+        if (number == null) {
+            return imageLibMapper.selectAll();
+        }
+        return imageLibMapper.selectLimit(number);
     }
 }

@@ -67,11 +67,6 @@ public class WebSocketServer {
         webSocketSet.add(this);
         addOnlineCount();
         log.info("有新连接加入！当前在线人数为" + getOnlineCount());
-        try {
-            sendMessage("连接成功");
-        } catch (IOException e) {
-            log.error("websocket IO异常");
-        }
     }
 
     /**

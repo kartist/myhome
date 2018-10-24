@@ -104,4 +104,18 @@ public class ImageServiceImpl implements ImageService {
         imageDto.setSuffix(imageLibEntity.getSuffix());
         return imageDto;
     }
+
+    /**
+     * 获取轮播图列表
+     *
+     * @return
+     */
+    @Override
+    public List<ImageDto> roundList() {
+        return imageRepository.getRoundList(4);
+    }
+
+    public List<ImageDto> all() {
+        return imageRepository.getRoundList(null);
+    }
 }

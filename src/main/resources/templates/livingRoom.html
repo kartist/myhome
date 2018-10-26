@@ -6,8 +6,15 @@
 <link rel="stylesheet" href="/static/layui/css/layui.css" th:href="@{/layui/css/layui.css}" media="all">
 <link rel="stylesheet" href="/static/css/common.css" th:href="@{/css/common.css}">
 <style>
-	.roll-img {
+	div {
+		background: transparent;
+	}
 
+	.display-img {
+		max-width: 200px;
+		max-height: 200px;
+		float: none;
+		width: auto;
 	}
 
 	.carousel-room {
@@ -27,13 +34,17 @@
 	}
 
 	.main-right {
-		float: left;
-		width: 550px;
+		float: right;
+		width: 100%;
+		max-width: 550px;
+		min-width: 500px;
 		margin: 0 auto;
 	}
 
 	.main-right-content {
-		width: 450px;
+		width: 100%;
+		max-width: 550px;
+		min-width: 500px;
 	}
 
 	.float-left {
@@ -46,16 +57,51 @@
 	}
 
 	.banner {
-		height: 550px;
+		margin: 0 auto;
+		width: 100%;
+		float: left;
 	}
 
 	.banner-after {
+		float: left;
 		margin: 0 auto;
-		width: 90%;
+		width: 100%;
 	}
 
 	.layui-input-block textarea {
 		min-height: 65px;
+	}
+
+	.img-container {
+		width: 200px;
+		height: 200px;
+		float: left;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		margin-top: 10px;
+	}
+
+	#carouse-div-id .roll-img-div {
+		width: 500px;
+		height: 360px;
+		float: left;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+
+	#imgList-div-id {
+		max-width: 1050px;
+		margin: 0 auto;
+	}
+
+	.layui-carousel > [carousel-item] > * {
+		background: transparent;
+	}
+
+	.layui-carousel {
+		background: transparent;
 	}
 </style>
 <th:block th:replace="fregment/header.html :: header-css"/>
@@ -71,9 +117,7 @@
 		<div class="main-left">
 			<div class="middle main-left-content">
 				<div class="layui-carousel carousel-room" id="carousel-id-1">
-					<div carousel-item id="carouse-div-id">
-						<img class="roll-img layui-col-md2"
-						     src="https://image.zhangxinxu.com/image/blog/201602/chuanyue.jpg"/>
+					<div carousel-item id="carouse-div-id" class="carous-div">
 					</div>
 				</div>
 			</div>
@@ -105,7 +149,7 @@
 
 	<div class="middle banner-after">
 		<div class="" id="imgList-div-id">
-			<img class="img layui-col-md2" src="https://image.zhangxinxu.com/image/blog/201602/chuanyue.jpg"/>
+
 		</div>
 	</div>
 </div>
@@ -123,17 +167,6 @@
         layer = layui.layer;
     });
 
-
-    layui.use('carousel', function () {
-        layui.carousel.render({
-            elem: $("#carousel-id-1")
-            , width: '500px' //设置容器宽度
-            , height: '360px'
-            , arrow: 'hover' //始终显示箭头
-            , indicator: 'none'
-            , interval: "3000"
-        });
-    });
 
 
     layui.use('element', function () {
@@ -172,6 +205,17 @@
 
     })
 
+    function lazyImageLoad() {
+        layui.use('flow', function () {
+            var flow = layui.flow;
+            //按屏加载图片
+            flow.lazyimg();
+        })
+    }
+
+    window.onscroll = function () {
+        lazyImageLoad();
+    }
 
 </script>
 <script>
@@ -280,10 +324,21 @@
         $("#carouse-div-id").html('')
         $.each(imgList, function (i, n) {
             var path = n.filePath;
-            var html = '<img class="roll-img layui-col-md2"' +
-                'src="http://file.angelachen.cn/' + path + '.' + n.suffix + '"/>'
+            var html = '<div><div class="roll-img-div"><img class="lazyImageLoad-img"' +
+                'src="http://file.angelachen.cn/' + path + '.' + n.suffix + '"/></div></div>'
             $("#carouse-div-id").append(html);
         })
+
+        layui.use('carousel', function () {
+            layui.carousel.render({
+                elem: $("#carousel-id-1")
+                , width: '500px' //设置容器宽度
+                , height: '360px'
+                , arrow: 'always' //始终显示箭头
+                , indicator: 'inside'
+                , interval: "3000"
+            });
+        });
 
     })
 
@@ -297,9 +352,15 @@
         $("#imgList-div-id").html('')
         $.each(imgList, function (i, n) {
             var path = n.filePath;
-            var html = '<img class="roll-img layui-col-md2"' +
-                'src="http://file.angelachen.cn/' + path + '.' + n.suffix + '"/>'
+            var html = '<div class="img-container"><img class="display-img"' +
+                'lay-src="http://file.angelachen.cn/' + path + '.' + n.suffix + '"/></div>'
             $("#imgList-div-id").append(html);
+        })
+        lazyImageLoad();
+        $(".display-img").on("click", function (ele) {
+            var minsrc = ele.currentTarget.src;
+            var src = minsrc.replace('/min/', '/src/');
+            window.open(src)
         })
     })
 

@@ -29,4 +29,9 @@ public class HtmlController {
     public String backyard() {
         return "backyard";
     }
+
+    @GetMapping("/messageBord")
+    public String messageBord(){
+        return "messageBord";
+    }
 }

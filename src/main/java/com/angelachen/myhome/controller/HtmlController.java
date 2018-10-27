@@ -37,6 +37,6 @@ public class HtmlController {
 
     @GetMapping("/newFreind")
     public String newFreind() {
-        return "newFreind";
+        return "regist";
     }
 }

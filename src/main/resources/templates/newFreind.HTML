@@ -1,15 +1,13 @@
 <!DOCTYPE html>
-<html lang="en"
-      xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org">
-<meta name="renderer" content="webkit">
-<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<html xmlns:th="http://www.thymeleaf.org"
+      lang="en"
+      xmlns="http://www.w3.org/1999/xhtml">
+
 <link rel="stylesheet" href="/static/layui/css/layui.css" th:href="@{/layui/css/layui.css}" media="all">
 <link rel="stylesheet" href="/static/css/common.css" th:href="@{/css/common.css}">
 <head>
 	<meta charset="UTF-8">
-	<title>欢迎朋友们</title>
+	<title>你好新朋友</title>
 </head>
 <body>
 
@@ -27,46 +25,52 @@
 					       class="layui-input keep-line">
 					<input type="password" name="password" required lay-verify="required" placeholder="暗号..."
 					       autocomplete="off"
-					       class="layui-input keep-line">
+					       class="layui-input keep-line dark-code">
+					<input type="password" required lay-verify="required" placeholder="确认暗号..."
+					       autocomplete="off"
+					       class="layui-input keep-line dark-code-repeat">
 				</div>
 				<div class="layui-form-item">
 					<div class="layui-input-block ">
-						<button class="layui-btn keep-line" lay-submit lay-filter="login">欢迎~</button>
+						<button class="layui-btn keep-line" lay-submit lay-filter="regist">好了~</button>
 					</div>
 				</div>
 				<div class="layui-input-block" style="position: relative;
     left: -14px;">
-					<button class="layui-btn" id="new-freind-id">我是新朋友</button>
+					<button class="layui-btn" id="old-freind-id">我知道暗号</button>
 				</div>
 			</div>
 		</div>
 	</div>
 </div>
 
-
-<th:block th:replace="fregment/bottom :: footer-bar"/>
-
 <script th:src="@{/js/lib/jquery-1.11.2.min.js}" src="/static/js/lib/jquery-1.11.2.min.js"></script>
 <script src="/static/layui/layui.js" th:src="@{/layui/layui.js}" charset="utf-8"></script>
-
 <script>
-    var layer;
-
-    layui.use('layer', function () {
-        layer = layui.layer;
-    });
-
+    $('#old-freind-id').on('click', function () {
+        window.location.href = "/"
+    })
 
     layui.use('form', function () {
         var form = layui.form;
         //各种基于事件的操作，下面会有进一步介绍
 
-        form.on('submit(login)', function (data) {
-            $.post("/user/login", data.field, function (data) {
+        form.on('submit(regist)', function (data) {
+            var code1 = $('.dark-code').val();
+            var code2 = $('.dark-code-repeat').val();
+            if (code1 !== code2) {
+                layer.msg("大侠,暗号有问题哦~再检查一遍暗号")
+                return;
+            }
+
+
+            $.post("/user/regist", data.field, function (data) {
                 if (data.state == 1) {
                     layer.msg("欢迎...请随我来!", {time: 1000}, function () {
                         window.location.href = "/messageBord";
                     })
+                } else if (data.state == 2) {
+                    layer.msg('对不起朋友,你已经有一个暗号了');
                 } else {
                     layer.msg('对不起朋友,请检查输入是否有误');
                     return false;
@@ -74,10 +78,6 @@
             });
         });
     });
-
-    $('#new-freind-id').on('click', function () {
-        window.location.href = '/newFreind'
-    })
 
 </script>
 </body>

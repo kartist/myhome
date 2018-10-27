@@ -3,8 +3,12 @@ package com.angelachen.myhome.controller;
 import com.angelachen.myhome.common.model.JsonResult;
 import com.angelachen.myhome.common.model.User;
 import com.angelachen.myhome.common.util.UserUtil;
+import com.angelachen.myhome.entity.UserEntity;
+import com.angelachen.myhome.mapper.UserEntityMapper;
 import com.angelachen.myhome.service.UserService;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -30,6 +34,9 @@ public class UserController {
     @Resource
     private UserService userService;
 
+    @Resource
+    private UserEntityMapper userEntityMapper;
+
     @RequestMapping("login")
     public JsonResult doLogin(@NotNull String userName, @NotNull String password, HttpServletRequest request) {
         HttpSession session = request.getSession();
@@ -47,6 +54,25 @@ public class UserController {
             attrbuts.add(attributeNames.nextElement());
         }
         attrbuts.forEach(session::removeAttribute);
+        return new JsonResult();
+    }
+
+    @PostMapping("/regist")
+    @Transactional(rollbackFor = Exception.class)
+    public JsonResult regist(@NotNull String userName, @NotNull String password, HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        UserEntity userEntity = userEntityMapper.selectByUserName(userName);
+        if (userEntity != null) {
+            return new JsonResult(2, " have regist ");
+        }
+        userEntity = new UserEntity();
+        userEntity.setName(userName);
+        userEntity.setPassword(password);
+        userEntityMapper.insertSelective(userEntity);
+
+        UserEntity createdUser = userEntityMapper.selectByUserName(userName);
+        User user = new User(createdUser);
+        session.setAttribute(UserUtil.SESSION_USER, user);
         return new JsonResult();
     }
 }

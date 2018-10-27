@@ -34,4 +34,9 @@ public class HtmlController {
     public String messageBord(){
         return "messageBord";
     }
+
+    @GetMapping("/newFreind")
+    public String newFreind() {
+        return "newFreind";
+    }
 }

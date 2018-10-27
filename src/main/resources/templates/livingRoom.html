@@ -358,9 +358,12 @@
         })
         lazyImageLoad();
         $(".display-img").on("click", function (ele) {
-            var minsrc = ele.currentTarget.src;
-            var src = minsrc.replace('/min/', '/src/');
-            window.open(src)
+            layer.confirm('源文件较大,加载可能缓慢,且流量消耗大,是否继续?', function () {
+                var minsrc = ele.currentTarget.src;
+                var src = minsrc.replace('/min/', '/src/');
+                window.open(src)
+                layer.closeAll();
+            });
         })
     })
 
